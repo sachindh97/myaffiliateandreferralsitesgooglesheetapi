@@ -1,3 +1,27 @@
+
+# Appscript method 
+
+function doGet() {
+  var doc = SpreadsheetApp.getActiveSpreadsheet()
+  var sheet = doc.getSheetByName('enter_your_sheet_name');
+  var values = sheet.getDataRange().getValues();
+
+  var output = [];
+  for (var i = 0; i < values.length; i++) {
+    var row = {};
+    row['srno'] = values[i][0];
+    row['site_name'] = values[i][1];
+    row['site_description'] = values[i][2];
+    row['site_url'] = values[i][3];
+    row['site_categories'] = values[i][4];
+    row['type'] = values[i][5];
+    output.push(row);
+  }
+  return ContentService.createTextOutput(JSON.stringify({ data: output })).setMimeType(ContentService.MimeType.JSON);
+
+}
+
+
 # Myaffiliatereferralsites
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
